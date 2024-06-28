@@ -2,10 +2,13 @@ import Header from "../components/Header"
 import Blogs from "../components/Blogs"
 import Footer from "../components/Footer"
 import { useLocation, useNavigate } from "react-router-dom"
+import { useContext } from "react"
+import { AppContext } from "../context/AppContext"
 
 export default function Body(){
     const navigate = useNavigate()
     const location = useLocation()
+    const {totalPages} = useContext(AppContext)
     let tag = null
     let category = undefined
 
@@ -34,7 +37,9 @@ export default function Body(){
                     </div>
                 }
             <Blogs/>
-            <Footer/>
+            {totalPages &&
+                <Footer/>
+            }
         </div>
     )
 }

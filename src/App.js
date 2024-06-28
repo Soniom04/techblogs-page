@@ -6,17 +6,19 @@ import BlogPage from './pages/BlogPage';
 
 
 function App() {
-  const {fetchData,setCategory,setTag} = useContext(AppContext)
+  const {fetchData,setCategory,setTag,setPage} = useContext(AppContext)
   const location = useLocation()
   const [searchParams,setSearchParams] = useSearchParams() 
 
   useEffect(()=>{
-    const page = searchParams.get('page')?? 1
+    let page = searchParams.get('page')?? 1
     if(location.pathname.includes('tag')){
       setTag(location.pathname.split('/').at(-1).replaceAll("-",' '))
+      setPage(1);
     }
     else if(location.pathname.includes('categories')){
       setCategory(location.pathname.split('/').at(-1).replaceAll('-',' '))
+      setPage(1);
     }
     else{
       setTag(null)
